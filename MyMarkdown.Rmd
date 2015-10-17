@@ -6,7 +6,7 @@
 data <- "E:/R/activity.csv"
 info <- read.csv(data)
 '''
-
+## add line here
 
 
 ###2. What is the mean of the number of steps taken per day?
