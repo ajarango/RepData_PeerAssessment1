@@ -1,0 +1,20 @@
+#Peer Assesment 1 : A.J. Arango
+==================================
+
+###1. First I will read the downloaded data 
+'''{r Read Data}
+data <- "E:/R/activity.csv"
+info <- read.csv(data)
+'''
+
+
+
+###2. What is the mean of the number of steps taken per day?
+'''{r Step Mean}
+mean(na.omit(info$steps))
+'''
+###3. How many Steps where taken total?
+'''{r Sum Steps}
+sum(na.omit(info$steps))
+'''
+
