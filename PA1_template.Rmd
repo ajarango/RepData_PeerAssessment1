@@ -6,7 +6,7 @@ output: html_document
 
 ###1. First I will read the downloaded data and load
 
-```{r}
+```{r eval=TRUE}
 #
 data <- "E:/R/activity.csv"
 info <- read.csv(data, header=TRUE , sep=",", stringsAsFactors = FALSE, colClasses = c("numeric","Date","numeric"))
@@ -17,7 +17,7 @@ print(str(info))
 ###2. What is the mean of the number of steps taken per day?
 
 
-```{r Steps per Day}
+```{r eval=TRUE}
  StepsInDay <- aggregate(info$steps, list(date=info$date),sum,na.rm=TRUE)
 
 xAxisBreakdown = seq(from=0,to=26000,by=1500) 
@@ -31,7 +31,7 @@ hist(StepsInDay$x,
 axis(side=1,at=xAxisBreakdown,labels=xAxisBreakdown)
 ```
 ##Mean steps
-```{r Mean steps}
+```{r eval=TRUE}
 meansteps <- mean(StepsInDay$x, na.rm =TRUE)
 print(paste("The Mean number of imputed steps per day is",meansteps))
 
@@ -39,13 +39,13 @@ print(paste("The Mean number of imputed steps per day is",meansteps))
 
 
 ##Median Steps
-```{r median steps}
+```{r eval=TRUE}
 mediansteps <- median(StepsInDay$x, na.rm = TRUE)
 print(paste("The median number of imputed steps per day is",mediansteps))
 ```
 
 ###3. Average daily activity pattern
-```{r}
+```{r eval=TRUE}
 TimeHours <- info$interval %/% 100
 
 TimeHours <- ifelse(TimeHours < 10, paste("0", TimeHours, sep=" "), TimeHours)
@@ -59,7 +59,7 @@ InterTime <- strptime(InterTime, format="%H:%M")
 info <- cbind(info,InterTime)
 ```
 
-```{r SPIGraph}
+```{r eval=TRUE}
 SPI <- aggregate(info$steps,list(InterTime=info$InterTime),mean,na.rm=TRUE)
 plot(SPI$InterTime,SPI$x,
      type = "l",
@@ -69,7 +69,7 @@ plot(SPI$InterTime,SPI$x,
 ```
 ###4. Handle Missing Values
 ##Part a
-```{r}
+```{r eval=TRUE}
 CountNA <- sum(is.na(info$steps))
 print(CountNA)
 ```
@@ -80,7 +80,7 @@ print(CountNA)
 ```
 
 ##Part c
-```{r}
+```{r eval=TRUE}
  StepsInDay <- aggregate(info$steps, list(date=info$date),sum,na.rm=TRUE)
 
 xAxisBreakdown = seq(from=0,to=26000,by=1500) 
