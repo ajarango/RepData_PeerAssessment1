@@ -41,7 +41,7 @@ hist(StepsInDay$x,
 axis(side=1,at=xAxisBreakdown,labels=xAxisBreakdown)
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
+![plot of chunk Steps per Day](figure/Steps per Day-1.png) 
 ##Mean steps
 
 ```r
@@ -91,7 +91,7 @@ plot(SPI$InterTime,SPI$x,
      ylab = "Average Steps")
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) 
+![plot of chunk SPIGraph](figure/SPIGraph-1.png) 
 ###4. Handle Missing Values
 ##Part a
 
@@ -123,5 +123,5 @@ hist(StepsInDay$x,
 axis(side=1,at=xAxisBreakdown,labels=xAxisBreakdown)
 ```
 
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
