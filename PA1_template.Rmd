@@ -1,23 +1,23 @@
 ---
-output: pdf_document
+output: html_document
 ---
 #Peer Assesment 1 : A.J. Arango
 ==================================
 
 ###1. First I will read the downloaded data and load
 
-'''{r Read Data}
+```{r}
+#
 data <- "E:/R/activity.csv"
-info <- read.csv(data, header=TRUE, sep=",", stringsAs Factors = False, colClasses = c("numeric","Date","numeric")
-)
+info <- read.csv(data, header=TRUE , sep=",", stringsAsFactors = FALSE, colClasses = c("numeric","Date","numeric"))
 print(str(info))
-'''
+```
 
 
 ###2. What is the mean of the number of steps taken per day?
 
 
-'''{r Steps per Day}
+```{r Steps per Day}
  StepsInDay <- aggregate(info$steps, list(date=info$date),sum,na.rm=TRUE)
 
 xAxisBreakdown = seq(from=0,to=26000,by=1500) 
@@ -29,21 +29,69 @@ hist(StepsInDay$x,
       ylab="Days",
       xaxt="n")
 axis(side=1,at=xAxisBreakdown,labels=xAxisBreakdown)
-'''
+```
 ##Mean steps
-'''{r Mean steps}
+```{r Mean steps}
 meansteps <- mean(StepsInDay$x, na.rm =TRUE)
 print(paste("The Mean number of imputed steps per day is",meansteps))
 
-'''
+```
 
 
 ##Median Steps
-'''{r median steps}
+```{r median steps}
 mediansteps <- median(StepsInDay$x, na.rm = TRUE)
 print(paste("The median number of imputed steps per day is",mediansteps))
-'''
+```
 
 ###3. Average daily activity pattern
+```{r}
+TimeHours <- info$interval %/% 100
 
+TimeHours <- ifelse(TimeHours < 10, paste("0", TimeHours, sep=" "), TimeHours)
+
+TimeMinutes <- info$interval %% 100
+TimeMinutes <- ifelse(TimeMinutes < 10, paste("0",TimeMinutes, sep=" "), TimeMinutes)
+
+InterTime <- paste(TimeHours, ":", TimeMinutes, sep="")
+InterTime <- strptime(InterTime, format="%H:%M")
+
+info <- cbind(info,InterTime)
+```
+
+```{r SPIGraph}
+SPI <- aggregate(info$steps,list(InterTime=info$InterTime),mean,na.rm=TRUE)
+plot(SPI$InterTime,SPI$x,
+     type = "l",
+     main = "Average Steps per Interval",
+     xlab = "Interval",
+     ylab = "Average Steps")
+```
+###4. Handle Missing Values
+##Part a
+```{r}
+CountNA <- sum(is.na(info$steps))
+print(CountNA)
+```
+
+##Part b
+```{r}
+
+```
+
+##Part c
+```{r}
+ StepsInDay <- aggregate(info$steps, list(date=info$date),sum,na.rm=TRUE)
+
+xAxisBreakdown = seq(from=0,to=26000,by=1500) 
+hist(StepsInDay$x,
+      breaks = xAxisBreakdown,
+      main="Frequency of Total Steps per Day",
+      col="blue",
+      xlab="Steps",
+      ylab="Days",
+      xaxt="n")
+axis(side=1,at=xAxisBreakdown,labels=xAxisBreakdown)
+
+```
 
